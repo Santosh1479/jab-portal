@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employer Dashboard - JobHub</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo"><a href="index.html">JobHub</a></div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li id="nav-user-section" style="display:none;">
+                    <span id="nav-username"></span>
+                    <a href="#" onclick="logout()">Logout</a>
+                </li>
+                <li id="nav-auth-section">
+                    <a href="login.html">Login</a>
+                    <a href="register.html" class="btn-register">Register</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="dashboard-header">
+            <h1>Employer Dashboard</h1>
+            <button onclick="openPostJobModal()" class="btn btn-primary">Post New Job</button>
+        </div>
+
+        <div class="dashboard-stats">
+            <div class="stat-card">
+                <h3>Jobs Posted</h3>
+                <p class="stat-number" id="jobsPostedCount">0</p>
+            </div>
+            <div class="stat-card">
+                <h3>Total Applications</h3>
+                <p class="stat-number" id="totalApplicationsCount">0</p>
+            </div>
+            <div class="stat-card">
+                <h3>Views</h3>
+                <p class="stat-number" id="viewsCount">0</p>
+            </div>
+        </div>
+
+        <div class="dashboard-content">
+            <div class="tabs">
+                <button class="tab-button active" onclick="switchTab('myJobs')">My Jobs</button>
+                <button class="tab-button" onclick="switchTab('applications')">Applications</button>
+            </div>
+
+            <!-- My Jobs Tab -->
+            <div id="myJobs" class="tab-content active">
+                <h2>Your Posted Jobs</h2>
+                <div id="jobsContainer" class="jobs-table">
+                    <p class="empty-message">No jobs posted yet. <a href="#" onclick="openPostJobModal()">Post a job</a></p>
+                </div>
+            </div>
+
+            <!-- Applications Tab -->
+            <div id="applications" class="tab-content">
+                <h2>Applications Received</h2>
+                <div id="applicationsContainer" class="applications-list">
+                    <p class="empty-message">No applications yet.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Post Job Modal -->
+    <div id="postJobModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closePostJobModal()">&times;</span>
+            <div class="modal-header">
+                <h2>Post a New Job</h2>
+            </div>
+            <form id="postJobForm" onsubmit="handlePostJob(event)">
+                <div class="form-group">
+                    <label for="jobTitle">Job Title</label>
+                    <input type="text" id="jobTitle" required placeholder="e.g., Senior Developer">
+                </div>
+
+                <div class="form-group">
+                    <label for="jobLocation">Location</label>
+                    <input type="text" id="jobLocation" required placeholder="e.g., New York, USA">
+                </div>
+
+                <div class="form-group">
+                    <label for="jobSalary">Salary Range</label>
+                    <input type="text" id="jobSalary" required placeholder="e.g., $80,000 - $120,000/year">
+                </div>
+
+                <div class="form-group">
+                    <label for="jobType">Job Type</label>
+                    <select id="jobType" required>
+                        <option value="">Select job type</option>
+                        <option value="Full-time">Full-time</option>
+                        <option value="Part-time">Part-time</option>
+                        <option value="Contract">Contract</option>
+                        <option value="Freelance">Freelance</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="jobMode">Work Mode</label>
+                    <select id="jobMode" required>
+                        <option value="">Select work mode</option>
+                        <option value="Remote">Remote</option>
+                        <option value="On-site">On-site</option>
+                        <option value="Hybrid">Hybrid</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="jobDescription">Job Description</label>
+                    <textarea id="jobDescription" required placeholder="Describe the job responsibilities, requirements, and benefits..." rows="6"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Post Job</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- View Applicant Modal -->
+    <div id="applicantModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeApplicantModal()">&times;</span>
+            <div class="modal-header">
+                <h2>Applicant Details</h2>
+            </div>
+            <div class="modal-body">
+                <div class="applicant-info">
+                    <p><strong>Name:</strong> <span id="applicantName"></span></p>
+                    <p><strong>Email:</strong> <span id="applicantEmail"></span></p>
+                    <p><strong>Phone:</strong> <span id="applicantPhone"></span></p>
+                    <p><strong>Applied for:</strong> <span id="applicantJobTitle"></span></p>
+                    <p><strong>Applied on:</strong> <span id="applicantDate"></span></p>
+                    <p><strong>Status:</strong> <span id="applicantStatus"></span></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button onclick="updateApplicationStatus('accepted')" class="btn btn-success">Accept</button>
+                <button onclick="updateApplicationStatus('rejected')" class="btn btn-danger">Reject</button>
+                <button onclick="closeApplicantModal()" class="btn btn-secondary">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 JobHub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="employer.js"></script>
+</body>
+</html>

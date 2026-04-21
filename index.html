@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobHub - Job Portal</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">JobHub</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li id="nav-dashboard-section" style="display:none;">
+                    <a href="employer-dashboard.html">Dashboard</a>
+                </li>
+                <li id="nav-user-section" style="display:none;">
+                    <span id="nav-username"></span>
+                    <a href="#" onclick="logout()">Logout</a>
+                </li>
+                <li id="nav-auth-section">
+                    <a href="login.html">Login</a>
+                    <a href="register.html" class="btn-register">Register</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-content" id="heroContent">
+            <h1>Find Your Dream Job</h1>
+            <p>Discover thousands of job opportunities with your desired salary & work location.</p>
+            <div class="hero-buttons">
+                <input type="text" placeholder="Job title or keyword" id="search-input">
+                <button onclick="searchJobs()" class="btn btn-primary">Search Jobs</button>
+            </div>
+        </div>
+        <div id="employerHero" style="display:none; text-align: center;">
+            <div class="hero-content">
+                <h1>Employer Dashboard</h1>
+                <p>Manage your job postings and applications</p>
+                <a href="employer-dashboard.html" class="btn btn-primary" style="display: inline-block; text-decoration: none;">Go to Dashboard</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <section class="stats">
+            <div class="stat-item">
+                <h3>5000+</h3>
+                <p>Active Jobs</p>
+            </div>
+            <div class="stat-item">
+                <h3>50000+</h3>
+                <p>Successfully Hired</p>
+            </div>
+            <div class="stat-item">
+                <h3>10000+</h3>
+                <p>Companies</p>
+            </div>
+        </section>
+
+        <section id="jobs" class="jobs">
+            <h2>Featured Jobs</h2>
+            <div class="job-listings">
+                <div class="job-card">
+                    <h3>Senior Developer</h3>
+                    <p class="company">Tech Solutions Inc.</p>
+                    <p class="location">🌍 New York, USA</p>
+                    <p class="salary">💰 $80,000 - $120,000/year</p>
+                    <p class="description">We are looking for an experienced developer to join our team...</p>
+                    <div class="job-tags">
+                        <span>Full-time</span>
+                        <span>Remote</span>
+                    </div>
+                    <button onclick="openJobModal('Senior Developer', 'Tech Solutions Inc.', 'New York, USA', '$80,000 - $120,000/year', 'We are looking for an experienced developer to join our team. You will work on cutting-edge technologies and collaborate with a talented team of engineers. Requirements: 5+ years of experience, proficiency in JavaScript/TypeScript, experience with React or Vue.js, strong problem-solving skills.')" class="btn btn-secondary">Apply Now</button>
+                </div>
+
+                <div class="job-card">
+                    <h3>UX/UI Designer</h3>
+                    <p class="company">Creative Agency Pro</p>
+                    <p class="location">🌍 San Francisco, USA</p>
+                    <p class="salary">💰 $60,000 - $90,000/year</p>
+                    <p class="description">Join our creative team to design amazing user experiences...</p>
+                    <div class="job-tags">
+                        <span>Full-time</span>
+                        <span>On-site</span>
+                    </div>
+                    <button onclick="openJobModal('UX/UI Designer', 'Creative Agency Pro', 'San Francisco, USA', '$60,000 - $90,000/year', 'Join our creative team to design amazing user experiences and build beautiful interfaces. You will collaborate with product managers and developers to create intuitive designs. Requirements: 3+ years of UX/UI design experience, proficiency in Figma, strong understanding of user-centered design principles, portfolio showcasing your work.')" class="btn btn-secondary">Apply Now</button>
+                </div>
+
+                <div class="job-card">
+                    <h3>Data Scientist</h3>
+                    <p class="company">Data Analytics Corp</p>
+                    <p class="location">🌍 Boston, USA</p>
+                    <p class="salary">💰 $90,000 - $150,000/year</p>
+                    <p class="description">Help us unlock insights from big data using advanced analytics...</p>
+                    <div class="job-tags">
+                        <span>Full-time</span>
+                        <span>Hybrid</span>
+                    </div>
+                    <button onclick="openJobModal('Data Scientist', 'Data Analytics Corp', 'Boston, USA', '$90,000 - $150,000/year', 'Help us unlock insights from big data using advanced analytics and machine learning. You will work with large datasets to drive business decisions. Requirements: Master\'s degree in Computer Science or Statistics, proficiency in Python/R, experience with TensorFlow or PyTorch, strong SQL skills.')" class="btn btn-secondary">Apply Now</button>
+                </div>
+
+                <div class="job-card">
+                    <h3>Marketing Manager</h3>
+                    <p class="company">Global Brands Ltd.</p>
+                    <p class="location">🌍 London, UK</p>
+                    <p class="salary">💰 $50,000 - $80,000/year</p>
+                    <p class="description">Lead our marketing initiatives and grow our brand presence...</p>
+                    <div class="job-tags">
+                        <span>Full-time</span>
+                        <span>On-site</span>
+                    </div>
+                    <button onclick="openJobModal('Marketing Manager', 'Global Brands Ltd.', 'London, UK', '$50,000 - $80,000/year', 'Lead our marketing initiatives and grow our brand presence globally. Develop and execute marketing strategies across multiple channels. Requirements: 7+ years of marketing experience, proven track record in brand building, expertise in digital marketing, leadership experience with team management.')" class="btn btn-secondary">Apply Now</button>
+                </div>
+
+                <div class="job-card">
+                    <h3>Frontend Developer</h3>
+                    <p class="company">WebDev Studio</p>
+                    <p class="location">🌍 Remote</p>
+                    <p class="salary">💰 $50,000 - $85,000/year</p>
+                    <p class="description">Build beautiful and interactive web applications...</p>
+                    <div class="job-tags">
+                        <span>Full-time</span>
+                        <span>Remote</span>
+                    </div>
+                    <button onclick="openJobModal('Frontend Developer', 'WebDev Studio', 'Remote', '$50,000 - $85,000/year', 'Build beautiful and interactive web applications using modern frameworks. Work in a collaborative remote environment with a passionate team. Requirements: 3+ years of frontend development, expertise in React/Vue/Angular, responsive design knowledge, familiarity with REST APIs.')" class="btn btn-secondary">Apply Now</button>
+                </div>
+
+                <div class="job-card">
+                    <h3>Product Manager</h3>
+                    <p class="company">Startup Hub</p>
+                    <p class="location">🌍 Austin, USA</p>
+                    <p class="salary">💰 $70,000 - $110,000/year</p>
+                    <p class="description">Shape the future of our innovative SaaS platform...</p>
+                    <div class="job-tags">
+                        <span>Full-time</span>
+                        <span>Hybrid</span>
+                    </div>
+                    <button onclick="openJobModal('Product Manager', 'Startup Hub', 'Austin, USA', '$70,000 - $110,000/year', 'Shape the future of our innovative SaaS platform as a Product Manager. Drive product vision and strategy alongside engineering and design teams. Requirements: 5+ years of product management experience, strong analytical skills, experience with SaaS products, excellent communication abilities.')" class="btn btn-secondary">Apply Now</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <h2>Why Choose JobHub?</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">🔍</div>
+                    <h3>Easy Search</h3>
+                    <p>Find jobs that match your skills and preferences effortlessly.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">💼</div>
+                    <h3>Best Companies</h3>
+                    <p>Apply to top companies looking for talented professionals.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📈</div>
+                    <h3>Career Growth</h3>
+                    <p>Discover opportunities that match your career aspirations.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Quick Apply</h3>
+                    <p>Apply to multiple jobs with just a few clicks.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Job Details Modal -->
+    <div id="jobModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeJobModal()">&times;</span>
+            <div class="modal-header">
+                <h2 id="modalJobTitle"></h2>
+                <p id="modalCompany" class="modal-company"></p>
+            </div>
+            <div class="modal-body">
+                <div class="modal-details">
+                    <p><strong>Location:</strong> <span id="modalLocation"></span></p>
+                    <p><strong>Salary:</strong> <span id="modalSalary"></span></p>
+                </div>
+                <div class="modal-description">
+                    <h3>Job Description</h3>
+                    <p id="modalDescription"></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button onclick="submitJobApplication()" class="btn btn-primary">Apply Now</button>
+                <button onclick="closeJobModal()" class="btn btn-secondary">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 JobHub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
