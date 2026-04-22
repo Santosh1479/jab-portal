@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Seeker Dashboard - JobHub</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo"><a href="index.html">JobHub</a></div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li id="nav-user-section" style="display:none;">
+                    <span id="nav-username"></span>
+                    <a href="#" onclick="logout()">Logout</a>
+                </li>
+                <li id="nav-auth-section">
+                    <a href="login.html">Login</a>
+                    <a href="register.html" class="btn-register">Register</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="dashboard-header">
+            <h1>Job Seeker Dashboard</h1>
+            <a href="index.html" class="btn btn-primary">Browse Jobs</a>
+        </div>
+
+        <div class="dashboard-stats">
+            <div class="stat-card">
+                <h3>Jobs Applied</h3>
+                <p class="stat-number" id="jobsAppliedCount">0</p>
+            </div>
+            <div class="stat-card">
+                <h3>Pending Applications</h3>
+                <p class="stat-number" id="pendingApplications">0</p>
+            </div>
+            <div class="stat-card">
+                <h3>Accepted</h3>
+                <p class="stat-number" id="acceptedApplications">0</p>
+            </div>
+        </div>
+
+        <div class="dashboard-content">
+            <!-- My Applications Tab -->
+            <div class="tab-content active">
+                <h2>My Applications</h2>
+                <div id="applicationsContainer" class="applications-list">
+                    <p class="empty-message">You haven't applied for any jobs yet. <a href="index.html">Browse jobs</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Application Details Modal -->
+    <div id="applicationDetailsModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeApplicationDetailsModal()">&times;</span>
+            <div class="modal-header">
+                <h2>📋 Application Details</h2>
+            </div>
+            <div class="modal-body">
+                <div class="application-details">
+                    <div class="detail-group">
+                        <label><strong>Job Title</strong></label>
+                        <p id="detailJobTitle"></p>
+                    </div>
+                    <div class="detail-group">
+                        <label><strong>Company</strong></label>
+                        <p id="detailCompany"></p>
+                    </div>
+                    <div class="detail-group">
+                        <label><strong>Location</strong></label>
+                        <p id="detailLocation"></p>
+                    </div>
+                    <div class="detail-group">
+                        <label><strong>Salary</strong></label>
+                        <p id="detailSalary"></p>
+                    </div>
+                    <div class="detail-group">
+                        <label><strong>Job Type</strong></label>
+                        <p id="detailType"></p>
+                    </div>
+                    <div class="detail-group">
+                        <label><strong>Work Mode</strong></label>
+                        <p id="detailMode"></p>
+                    </div>
+                    <div class="detail-group">
+                        <label><strong>Job Description</strong></label>
+                        <p id="detailDescription"></p>
+                    </div>
+                    <div class="detail-group">
+                        <label><strong>Applied On</strong></label>
+                        <p id="detailAppliedDate"></p>
+                    </div>
+                    <div class="detail-group">
+                        <label><strong>Status</strong></label>
+                        <p id="detailStatus" class="app-status"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button onclick="withdrawApplication()" class="btn btn-danger">Withdraw Application</button>
+                <button onclick="closeApplicationDetailsModal()" class="btn btn-secondary">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 JobHub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="seeker.js"></script>
+</body>
+</html>

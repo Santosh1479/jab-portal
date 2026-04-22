@@ -1081,3 +1081,47 @@ footer {
         min-width: 100px;
     }
 }
+
+/* Job Seeker Dashboard Styles */
+.app-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.app-actions .btn-small {
+    flex: 1;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+
+.application-details {
+    padding: 1.5rem 0;
+}
+
+.detail-group {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.detail-group label {
+    display: block;
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.detail-group p {
+    margin: 0;
+    color: #333;
+    line-height: 1.6;
+}
+
+.detail-group:last-child {
+    border-bottom: none;
+}
+

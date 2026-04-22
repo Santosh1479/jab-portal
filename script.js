@@ -9,6 +9,7 @@ function updateNavbar() {
     const userSection = document.getElementById('nav-user-section');
     const authSection = document.getElementById('nav-auth-section');
     const dashboardSection = document.getElementById('nav-dashboard-section');
+    const seekerDashboardSection = document.getElementById('nav-seeker-dashboard-section');
     const username = document.getElementById('nav-username');
     const heroContent = document.getElementById('heroContent');
     const employerHero = document.getElementById('employerHero');
@@ -19,13 +20,16 @@ function updateNavbar() {
         if (authSection) authSection.style.display = 'none';
         if (username) username.textContent = `Welcome, ${user.fullname}!`;
         
-        // Show dashboard link and hero for employers
+        // Show dashboard link for employers
         if (user.userType === 'employer') {
             if (dashboardSection) dashboardSection.style.display = 'block';
+            if (seekerDashboardSection) seekerDashboardSection.style.display = 'none';
             if (heroContent) heroContent.style.display = 'none';
             if (employerHero) employerHero.style.display = 'block';
         } else {
+            // Show dashboard link for job seekers
             if (dashboardSection) dashboardSection.style.display = 'none';
+            if (seekerDashboardSection) seekerDashboardSection.style.display = 'block';
             if (heroContent) heroContent.style.display = 'block';
             if (employerHero) employerHero.style.display = 'none';
         }
@@ -33,6 +37,7 @@ function updateNavbar() {
         if (userSection) userSection.style.display = 'none';
         if (authSection) authSection.style.display = 'flex';
         if (dashboardSection) dashboardSection.style.display = 'none';
+        if (seekerDashboardSection) seekerDashboardSection.style.display = 'none';
         if (heroContent) heroContent.style.display = 'block';
         if (employerHero) employerHero.style.display = 'none';
     }
@@ -309,23 +314,42 @@ function applyJob() {
         return;
     }
 
-    alert('Application submitted! We will review it and contact you soon.');
-
-    // In a real app, this would save the application to a backend
+    // Check if already applied
     let applications = JSON.parse(localStorage.getItem('applications')) || [];
+    const alreadyApplied = applications.some(app => 
+        app.userId === user.id && 
+        app.jobTitle === window.currentJobData.title &&
+        app.company === window.currentJobData.company
+    );
+
+    if (alreadyApplied) {
+        alert('You have already applied for this job');
+        return;
+    }
+
+    // Save complete application with all job details
     const application = {
         id: Date.now(),
         userId: user.id,
-        jobTitle: event.target.parentElement.querySelector('h3').textContent,
+        jobTitle: window.currentJobData.title,
+        company: window.currentJobData.company,
+        location: window.currentJobData.location,
+        salary: window.currentJobData.salary,
+        type: window.currentJobData.type,
+        mode: window.currentJobData.mode,
+        description: window.currentJobData.description,
         appliedDate: new Date().toLocaleDateString(),
         status: 'pending'
     };
     applications.push(application);
     localStorage.setItem('applications', JSON.stringify(applications));
+
+    alert('Application submitted! You can view your applications in your dashboard.');
+    closeJobModal();
 }
 
 // Open Job Modal
-function openJobModal(jobTitle, company, location, salary, description) {
+function openJobModal(jobTitle, company, location, salary, description, jobType = 'Full-time', workMode = 'On-site') {
     const modal = document.getElementById('jobModal');
     document.getElementById('modalJobTitle').textContent = jobTitle;
     document.getElementById('modalCompany').textContent = company;
@@ -339,6 +363,8 @@ function openJobModal(jobTitle, company, location, salary, description) {
         company: company,
         location: location,
         salary: salary,
+        type: jobType,
+        mode: workMode,
         description: description
     };
     
