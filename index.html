@@ -46,6 +46,45 @@
     </div>
 
     <div class="container">
+        <section class="search-filters">
+            <h2>Search with Filters</h2>
+            <div class="filters-grid">
+                <div class="filter-item">
+                    <label for="filterKeyword">Job Title / Keyword</label>
+                    <input type="text" id="filterKeyword" placeholder="e.g., Developer, Designer">
+                </div>
+                <div class="filter-item">
+                    <label for="filterLocation">Location</label>
+                    <input type="text" id="filterLocation" placeholder="e.g., New York, Remote">
+                </div>
+                <div class="filter-item">
+                    <label for="filterJobType">Job Type</label>
+                    <select id="filterJobType">
+                        <option value="">All Types</option>
+                        <option value="Full-time">Full-time</option>
+                        <option value="Part-time">Part-time</option>
+                        <option value="Contract">Contract</option>
+                        <option value="Freelance">Freelance</option>
+                    </select>
+                </div>
+                <div class="filter-item">
+                    <label for="filterWorkMode">Work Mode</label>
+                    <select id="filterWorkMode">
+                        <option value="">All Modes</option>
+                        <option value="Remote">Remote</option>
+                        <option value="On-site">On-site</option>
+                        <option value="Hybrid">Hybrid</option>
+                    </select>
+                </div>
+                <div class="filter-item">
+                    <label>&nbsp;</label>
+                    <button onclick="advancedSearch()" class="btn btn-primary btn-block">Apply Filters</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="container">
         <section class="stats">
             <div class="stat-item">
                 <h3>5000+</h3>
@@ -65,81 +104,159 @@
             <h2>Featured Jobs</h2>
             <div class="job-listings">
                 <div class="job-card">
-                    <h3>Senior Developer</h3>
-                    <p class="company">Tech Solutions Inc.</p>
-                    <p class="location">🌍 New York, USA</p>
-                    <p class="salary">💰 $80,000 - $120,000/year</p>
-                    <p class="description">We are looking for an experienced developer to join our team...</p>
-                    <div class="job-tags">
-                        <span>Full-time</span>
-                        <span>Remote</span>
-                    </div>
-                    <button onclick="openJobModal('Senior Developer', 'Tech Solutions Inc.', 'New York, USA', '$80,000 - $120,000/year', 'We are looking for an experienced developer to join our team. You will work on cutting-edge technologies and collaborate with a talented team of engineers. Requirements: 5+ years of experience, proficiency in JavaScript/TypeScript, experience with React or Vue.js, strong problem-solving skills.')" class="btn btn-secondary">Apply Now</button>
-                </div>
-
-                <div class="job-card">
-                    <h3>UX/UI Designer</h3>
-                    <p class="company">Creative Agency Pro</p>
-                    <p class="location">🌍 San Francisco, USA</p>
-                    <p class="salary">💰 $60,000 - $90,000/year</p>
-                    <p class="description">Join our creative team to design amazing user experiences...</p>
+                    <h3>Senior Java Developer</h3>
+                    <p class="company">Infosys Limited</p>
+                    <p class="location">🌍 Bangalore, Karnataka</p>
+                    <p class="salary">💰 ₹12,00,000 - ₹18,00,000/year</p>
+                    <p class="description">Join our development team to work on enterprise Java applications...</p>
                     <div class="job-tags">
                         <span>Full-time</span>
                         <span>On-site</span>
                     </div>
-                    <button onclick="openJobModal('UX/UI Designer', 'Creative Agency Pro', 'San Francisco, USA', '$60,000 - $90,000/year', 'Join our creative team to design amazing user experiences and build beautiful interfaces. You will collaborate with product managers and developers to create intuitive designs. Requirements: 3+ years of UX/UI design experience, proficiency in Figma, strong understanding of user-centered design principles, portfolio showcasing your work.')" class="btn btn-secondary">Apply Now</button>
+                    <button onclick="openJobModal('Senior Java Developer', 'Infosys Limited', 'Bangalore, Karnataka', '₹12,00,000 - ₹18,00,000/year', 'Join our development team to work on enterprise Java applications. Collaborate with global teams on innovative solutions. Requirements: 5+ years of Java experience, Spring Boot expertise, microservices architecture knowledge, strong problem-solving skills.')" class="btn btn-secondary">Apply Now</button>
                 </div>
 
                 <div class="job-card">
-                    <h3>Data Scientist</h3>
-                    <p class="company">Data Analytics Corp</p>
-                    <p class="location">🌍 Boston, USA</p>
-                    <p class="salary">💰 $90,000 - $150,000/year</p>
-                    <p class="description">Help us unlock insights from big data using advanced analytics...</p>
+                    <h3>Business Analyst</h3>
+                    <p class="company">TCS (Tata Consultancy Services)</p>
+                    <p class="location">🌍 Mumbai, Maharashtra</p>
+                    <p class="salary">💰 ₹8,00,000 - ₹12,00,000/year</p>
+                    <p class="description">Analyze business requirements and deliver solutions...</p>
                     <div class="job-tags">
                         <span>Full-time</span>
                         <span>Hybrid</span>
                     </div>
-                    <button onclick="openJobModal('Data Scientist', 'Data Analytics Corp', 'Boston, USA', '$90,000 - $150,000/year', 'Help us unlock insights from big data using advanced analytics and machine learning. You will work with large datasets to drive business decisions. Requirements: Master\'s degree in Computer Science or Statistics, proficiency in Python/R, experience with TensorFlow or PyTorch, strong SQL skills.')" class="btn btn-secondary">Apply Now</button>
+                    <button onclick="openJobModal('Business Analyst', 'TCS (Tata Consultancy Services)', 'Mumbai, Maharashtra', '₹8,00,000 - ₹12,00,000/year', 'Analyze business requirements and deliver effective IT solutions. Work with cross-functional teams in an Agile environment. Requirements: 3+ years of BA experience, strong communication skills, experience with JIRA, SQL knowledge, excellent analytical abilities.')" class="btn btn-secondary">Apply Now</button>
                 </div>
 
                 <div class="job-card">
-                    <h3>Marketing Manager</h3>
-                    <p class="company">Global Brands Ltd.</p>
-                    <p class="location">🌍 London, UK</p>
-                    <p class="salary">💰 $50,000 - $80,000/year</p>
-                    <p class="description">Lead our marketing initiatives and grow our brand presence...</p>
-                    <div class="job-tags">
-                        <span>Full-time</span>
-                        <span>On-site</span>
-                    </div>
-                    <button onclick="openJobModal('Marketing Manager', 'Global Brands Ltd.', 'London, UK', '$50,000 - $80,000/year', 'Lead our marketing initiatives and grow our brand presence globally. Develop and execute marketing strategies across multiple channels. Requirements: 7+ years of marketing experience, proven track record in brand building, expertise in digital marketing, leadership experience with team management.')" class="btn btn-secondary">Apply Now</button>
-                </div>
-
-                <div class="job-card">
-                    <h3>Frontend Developer</h3>
-                    <p class="company">WebDev Studio</p>
-                    <p class="location">🌍 Remote</p>
-                    <p class="salary">💰 $50,000 - $85,000/year</p>
-                    <p class="description">Build beautiful and interactive web applications...</p>
+                    <h3>Full Stack Developer</h3>
+                    <p class="company">HCL Technologies</p>
+                    <p class="location">🌍 Bangalore, Karnataka</p>
+                    <p class="salary">💰 ₹10,00,000 - ₹15,00,000/year</p>
+                    <p class="description">Build scalable web applications using modern technologies...</p>
                     <div class="job-tags">
                         <span>Full-time</span>
                         <span>Remote</span>
                     </div>
-                    <button onclick="openJobModal('Frontend Developer', 'WebDev Studio', 'Remote', '$50,000 - $85,000/year', 'Build beautiful and interactive web applications using modern frameworks. Work in a collaborative remote environment with a passionate team. Requirements: 3+ years of frontend development, expertise in React/Vue/Angular, responsive design knowledge, familiarity with REST APIs.')" class="btn btn-secondary">Apply Now</button>
+                    <button onclick="openJobModal('Full Stack Developer', 'HCL Technologies', 'Bangalore, Karnataka', '₹10,00,000 - ₹15,00,000/year', 'Build scalable web applications using React, Node.js, and Cloud technologies. Work on innovative projects with a talented team. Requirements: 4+ years of full stack experience, expertise in React and Node.js, AWS/Azure knowledge, REST API development experience.')" class="btn btn-secondary">Apply Now</button>
                 </div>
 
                 <div class="job-card">
-                    <h3>Product Manager</h3>
-                    <p class="company">Startup Hub</p>
-                    <p class="location">🌍 Austin, USA</p>
-                    <p class="salary">💰 $70,000 - $110,000/year</p>
-                    <p class="description">Shape the future of our innovative SaaS platform...</p>
+                    <h3>QA Automation Engineer</h3>
+                    <p class="company">Wipro Limited</p>
+                    <p class="location">🌍 Pune, Maharashtra</p>
+                    <p class="salary">💰 ₹7,00,000 - ₹10,00,000/year</p>
+                    <p class="description">Develop and maintain automated test scripts for web applications...</p>
+                    <div class="job-tags">
+                        <span>Full-time</span>
+                        <span>On-site</span>
+                    </div>
+                    <button onclick="openJobModal('QA Automation Engineer', 'Wipro Limited', 'Pune, Maharashtra', '₹7,00,000 - ₹10,00,000/year', 'Develop and maintain automated test scripts for web and mobile applications. Ensure quality standards and reduce manual testing efforts. Requirements: 3+ years of QA automation, expertise in Selenium and TestNG, strong Java programming, Agile experience.')" class="btn btn-secondary">Apply Now</button>
+                </div>
+
+                <div class="job-card">
+                    <h3>Cloud Solutions Architect</h3>
+                    <p class="company">Amazon India</p>
+                    <p class="location">🌍 Bangalore, Karnataka</p>
+                    <p class="salary">💰 ₹18,00,000 - ₹25,00,000/year</p>
+                    <p class="description">Design cloud solutions and lead infrastructure projects...</p>
                     <div class="job-tags">
                         <span>Full-time</span>
                         <span>Hybrid</span>
                     </div>
-                    <button onclick="openJobModal('Product Manager', 'Startup Hub', 'Austin, USA', '$70,000 - $110,000/year', 'Shape the future of our innovative SaaS platform as a Product Manager. Drive product vision and strategy alongside engineering and design teams. Requirements: 5+ years of product management experience, strong analytical skills, experience with SaaS products, excellent communication abilities.')" class="btn btn-secondary">Apply Now</button>
+                    <button onclick="openJobModal('Cloud Solutions Architect', 'Amazon India', 'Bangalore, Karnataka', '₹18,00,000 - ₹25,00,000/year', 'Design and implement cloud solutions for enterprise clients. Lead architecture decisions and mentor junior architects. Requirements: 7+ years of cloud experience, AWS/Azure expertise, strong system design skills, excellent leadership abilities.')" class="btn btn-secondary">Apply Now</button>
+                </div>
+
+                <div class="job-card">
+                    <h3>Python Developer</h3>
+                    <p class="company">Accenture India</p>
+                    <p class="location">🌍 Mysore, Karnataka</p>
+                    <p class="salary">💰 ₹8,00,000 - ₹13,00,000/year</p>
+                    <p class="description">Develop Python-based applications and data solutions...</p>
+                    <div class="job-tags">
+                        <span>Full-time</span>
+                        <span>Remote</span>
+                    </div>
+                    <button onclick="openJobModal('Python Developer', 'Accenture India', 'Mysore, Karnataka', '₹8,00,000 - ₹13,00,000/year', 'Develop Python-based applications and data analytics solutions. Work with AI/ML teams on cutting-edge projects. Requirements: 3+ years of Python experience, Django/Flask knowledge, data analysis skills, strong debugging abilities.')" class="btn btn-secondary">Apply Now</button>
+                </div>
+
+                <div class="job-card">
+                    <h3>Data Science Engineer</h3>
+                    <p class="company">LinkedIn India</p>
+                    <p class="location">🌍 Bangalore, Karnataka</p>
+                    <p class="salary">💰 ₹15,00,000 - ₹22,00,000/year</p>
+                    <p class="description">Build machine learning models and data pipelines...</p>
+                    <div class="job-tags">
+                        <span>Full-time</span>
+                        <span>On-site</span>
+                    </div>
+                    <button onclick="openJobModal('Data Science Engineer', 'LinkedIn India', 'Bangalore, Karnataka', '₹15,00,000 - ₹22,00,000/year', 'Build machine learning models and data pipelines for our platform. Work with big data technologies and statistical analysis. Requirements: 4+ years of data science experience, proficiency in Python/R, Spark knowledge, strong mathematics background.')" class="btn btn-secondary">Apply Now</button>
+                </div>
+
+                <div class="job-card">
+                    <h3>Android Developer</h3>
+                    <p class="company">Flipkart</p>
+                    <p class="location">🌍 Bangalore, Karnataka</p>
+                    <p class="salary">💰 ₹11,00,000 - ₹16,00,000/year</p>
+                    <p class="description">Develop and maintain mobile applications for millions of users...</p>
+                    <div class="job-tags">
+                        <span>Full-time</span>
+                        <span>On-site</span>
+                    </div>
+                    <button onclick="openJobModal('Android Developer', 'Flipkart', 'Bangalore, Karnataka', '₹11,00,000 - ₹16,00,000/year', 'Develop and maintain Android applications for our e-commerce platform. Work with cutting-edge technologies and large-scale systems. Requirements: 4+ years of Android development, Kotlin/Java expertise, UI/UX knowledge, performance optimization skills.')" class="btn btn-secondary">Apply Now</button>
+                </div>
+
+                <div class="job-card">
+                    <h3>.NET Developer</h3>
+                    <p class="company">Cognizant</p>
+                    <p class="location">🌍 Mangalore, Karnataka</p>
+                    <p class="salary">💰 ₹9,00,000 - ₹14,00,000/year</p>
+                    <p class="description">Develop enterprise applications using .NET framework...</p>
+                    <div class="job-tags">
+                        <span>Full-time</span>
+                        <span>Hybrid</span>
+                    </div>
+                    <button onclick="openJobModal('.NET Developer', 'Cognizant', 'Mangalore, Karnataka', '₹9,00,000 - ₹14,00,000/year', 'Develop enterprise applications using .NET and C#. Work on international projects with diverse teams. Requirements: 3+ years of .NET experience, C# proficiency, SQL Server knowledge, MVC framework expertise.')" class="btn btn-secondary">Apply Now</button>
+                </div>
+
+                <div class="job-card">
+                    <h3>DevOps Engineer</h3>
+                    <p class="company">Google India</p>
+                    <p class="location">🌍 Bangalore, Karnataka</p>
+                    <p class="salary">💰 ₹16,00,000 - ₹24,00,000/year</p>
+                    <p class="description">Manage infrastructure and deployment pipelines...</p>
+                    <div class="job-tags">
+                        <span>Full-time</span>
+                        <span>Hybrid</span>
+                    </div>
+                    <button onclick="openJobModal('DevOps Engineer', 'Google India', 'Bangalore, Karnataka', '₹16,00,000 - ₹24,00,000/year', 'Manage infrastructure, deployment pipelines, and cloud systems. Work on high-scale distributed systems. Requirements: 5+ years of DevOps experience, Kubernetes expertise, Docker proficiency, CI/CD pipeline knowledge.')" class="btn btn-secondary">Apply Now</button>
+                </div>
+
+                <div class="job-card">
+                    <h3>Database Administrator</h3>
+                    <p class="company">Capgemini</p>
+                    <p class="location">🌍 Mysore, Karnataka</p>
+                    <p class="salary">💰 ₹8,50,000 - ₹12,50,000/year</p>
+                    <p class="description">Manage and optimize database systems for enterprise applications...</p>
+                    <div class="job-tags">
+                        <span>Full-time</span>
+                        <span>On-site</span>
+                    </div>
+                    <button onclick="openJobModal('Database Administrator', 'Capgemini', 'Mysore, Karnataka', '₹8,50,000 - ₹12,50,000/year', 'Manage and optimize database systems for enterprise applications. Ensure data security and system performance. Requirements: 4+ years of DBA experience, strong SQL knowledge, Oracle/MySQL expertise, backup/recovery skills.')" class="btn btn-secondary">Apply Now</button>
+                </div>
+
+                <div class="job-card">
+                    <h3>UI/UX Designer</h3>
+                    <p class="company">Ola</p>
+                    <p class="location">🌍 Bangalore, Karnataka</p>
+                    <p class="salary">💰 ₹9,00,000 - ₹14,00,000/year</p>
+                    <p class="description">Design intuitive user interfaces for mobile and web applications...</p>
+                    <div class="job-tags">
+                        <span>Full-time</span>
+                        <span>On-site</span>
+                    </div>
+                    <button onclick="openJobModal('UI/UX Designer', 'Ola', 'Bangalore, Karnataka', '₹9,00,000 - ₹14,00,000/year', 'Design intuitive user interfaces for our mobile and web platforms. Collaborate with product and engineering teams. Requirements: 3+ years of UI/UX experience, Figma/Adobe XD proficiency, strong design principles, user research skills.')" class="btn btn-secondary">Apply Now</button>
                 </div>
             </div>
         </section>

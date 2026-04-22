@@ -175,7 +175,122 @@ function searchJobs() {
         return;
     }
 
-    alert('Searching for: ' + searchTerm + '\n(This would connect to a backend in a real application)');
+    // Get all jobs (Indian jobs only)
+    const featuredJobs = [
+        { title: 'Senior Java Developer', company: 'Infosys Limited', location: 'Bangalore, Karnataka', salary: '₹12,00,000 - ₹18,00,000/year', type: 'Full-time', mode: 'On-site' },
+        { title: 'Business Analyst', company: 'TCS (Tata Consultancy Services)', location: 'Mumbai, Maharashtra', salary: '₹8,00,000 - ₹12,00,000/year', type: 'Full-time', mode: 'Hybrid' },
+        { title: 'Full Stack Developer', company: 'HCL Technologies', location: 'Bangalore, Karnataka', salary: '₹10,00,000 - ₹15,00,000/year', type: 'Full-time', mode: 'Remote' },
+        { title: 'QA Automation Engineer', company: 'Wipro Limited', location: 'Pune, Maharashtra', salary: '₹7,00,000 - ₹10,00,000/year', type: 'Full-time', mode: 'On-site' },
+        { title: 'Cloud Solutions Architect', company: 'Amazon India', location: 'Bangalore, Karnataka', salary: '₹18,00,000 - ₹25,00,000/year', type: 'Full-time', mode: 'Hybrid' },
+        { title: 'Python Developer', company: 'Accenture India', location: 'Mysore, Karnataka', salary: '₹8,00,000 - ₹13,00,000/year', type: 'Full-time', mode: 'Remote' },
+        { title: 'Data Science Engineer', company: 'LinkedIn India', location: 'Bangalore, Karnataka', salary: '₹15,00,000 - ₹22,00,000/year', type: 'Full-time', mode: 'On-site' },
+        { title: 'Android Developer', company: 'Flipkart', location: 'Bangalore, Karnataka', salary: '₹11,00,000 - ₹16,00,000/year', type: 'Full-time', mode: 'On-site' },
+        { title: '.NET Developer', company: 'Cognizant', location: 'Mangalore, Karnataka', salary: '₹9,00,000 - ₹14,00,000/year', type: 'Full-time', mode: 'Hybrid' },
+        { title: 'DevOps Engineer', company: 'Google India', location: 'Bangalore, Karnataka', salary: '₹16,00,000 - ₹24,00,000/year', type: 'Full-time', mode: 'Hybrid' },
+        { title: 'Database Administrator', company: 'Capgemini', location: 'Mysore, Karnataka', salary: '₹8,50,000 - ₹12,50,000/year', type: 'Full-time', mode: 'On-site' },
+        { title: 'UI/UX Designer', company: 'Ola', location: 'Bangalore, Karnataka', salary: '₹9,00,000 - ₹14,00,000/year', type: 'Full-time', mode: 'On-site' }
+    ];
+
+    // Filter jobs
+    const filteredJobs = featuredJobs.filter(job => 
+        job.title.toLowerCase().includes(searchTerm) || 
+        job.company.toLowerCase().includes(searchTerm) ||
+        job.location.toLowerCase().includes(searchTerm)
+    );
+
+    displaySearchResults(filteredJobs, searchTerm);
+}
+
+// Advanced Search with Filters
+function advancedSearch() {
+    const keyword = document.getElementById('filterKeyword').value.trim().toLowerCase();
+    const location = document.getElementById('filterLocation').value.trim().toLowerCase();
+    const jobType = document.getElementById('filterJobType').value;
+    const workMode = document.getElementById('filterWorkMode').value;
+
+    // Get all Indian jobs (no international jobs)
+    const featuredJobs = [
+        { title: 'Senior Java Developer', company: 'Infosys Limited', location: 'Bangalore, Karnataka', salary: '₹12,00,000 - ₹18,00,000/year', type: 'Full-time', mode: 'On-site' },
+        { title: 'Business Analyst', company: 'TCS', location: 'Mumbai, Maharashtra', salary: '₹8,00,000 - ₹12,00,000/year', type: 'Full-time', mode: 'Hybrid' },
+        { title: 'Full Stack Developer', company: 'HCL Technologies', location: 'Bangalore, Karnataka', salary: '₹10,00,000 - ₹15,00,000/year', type: 'Full-time', mode: 'Remote' },
+        { title: 'QA Automation Engineer', company: 'Wipro Limited', location: 'Pune, Maharashtra', salary: '₹7,00,000 - ₹10,00,000/year', type: 'Full-time', mode: 'On-site' },
+        { title: 'Cloud Solutions Architect', company: 'Amazon India', location: 'Bangalore, Karnataka', salary: '₹18,00,000 - ₹25,00,000/year', type: 'Full-time', mode: 'Hybrid' },
+        { title: 'Python Developer', company: 'Accenture India', location: 'Mysore, Karnataka', salary: '₹8,00,000 - ₹13,00,000/year', type: 'Full-time', mode: 'Remote' },
+        { title: 'Data Science Engineer', company: 'LinkedIn India', location: 'Bangalore, Karnataka', salary: '₹15,00,000 - ₹22,00,000/year', type: 'Full-time', mode: 'On-site' },
+        { title: 'Android Developer', company: 'Flipkart', location: 'Bangalore, Karnataka', salary: '₹11,00,000 - ₹16,00,000/year', type: 'Full-time', mode: 'On-site' },
+        { title: '.NET Developer', company: 'Cognizant', location: 'Mangalore, Karnataka', salary: '₹9,00,000 - ₹14,00,000/year', type: 'Full-time', mode: 'Hybrid' },
+        { title: 'DevOps Engineer', company: 'Google India', location: 'Bangalore, Karnataka', salary: '₹16,00,000 - ₹24,00,000/year', type: 'Full-time', mode: 'Hybrid' },
+        { title: 'Database Administrator', company: 'Capgemini', location: 'Mysore, Karnataka', salary: '₹8,50,000 - ₹12,50,000/year', type: 'Full-time', mode: 'On-site' },
+        { title: 'UI/UX Designer', company: 'Ola', location: 'Bangalore, Karnataka', salary: '₹9,00,000 - ₹14,00,000/year', type: 'Full-time', mode: 'On-site' }
+    ];
+
+    // Filter jobs based on all criteria
+    const filteredJobs = featuredJobs.filter(job => {
+        const keywordMatch = !keyword || 
+            job.title.toLowerCase().includes(keyword) || 
+            job.company.toLowerCase().includes(keyword);
+        
+        const locationMatch = !location || 
+            job.location.toLowerCase().includes(location);
+        
+        const typeMatch = !jobType || job.type === jobType;
+        const modeMatch = !workMode || job.mode === workMode;
+
+        return keywordMatch && locationMatch && typeMatch && modeMatch;
+    });
+
+    const filterSummary = `${keyword ? 'Keyword: ' + keyword : ''} ${location ? 'Location: ' + location : ''} ${jobType ? 'Type: ' + jobType : ''} ${workMode ? 'Mode: ' + workMode : ''}`.trim();
+    
+    displaySearchResults(filteredJobs, filterSummary || 'All Jobs');
+}
+
+// Display Search Results
+function displaySearchResults(jobs, searchTerm) {
+    if (jobs.length === 0) {
+        alert(`No jobs found for "${searchTerm}". Please try another search.`);
+        return;
+    }
+
+    // Display search results
+    let resultHTML = `<h2>Search Results for "${searchTerm}" (${jobs.length} jobs found)</h2>`;
+    resultHTML += '<div class="search-results">';
+    
+    jobs.forEach(job => {
+        resultHTML += `
+            <div class="search-result-card">
+                <h3>${job.title}</h3>
+                <p class="company">${job.company}</p>
+                <p class="location">🌍 ${job.location}</p>
+                <p class="salary">💰 ${job.salary}</p>
+                <div class="job-tags">
+                    <span>${job.type}</span>
+                    <span>${job.mode}</span>
+                </div>
+                <button onclick="applyJob()" class="btn btn-secondary">Apply Now</button>
+            </div>
+        `;
+    });
+    
+    resultHTML += '</div>';
+
+    // Scroll to results section
+    const container = document.querySelector('.container');
+    const searchResultsDiv = document.createElement('div');
+    searchResultsDiv.className = 'search-results-section';
+    searchResultsDiv.innerHTML = resultHTML;
+    
+    // Remove previous search results if any
+    const previousResults = document.querySelector('.search-results-section');
+    if (previousResults) {
+        previousResults.remove();
+    }
+    
+    // Insert after hero section or search-filters section
+    const jobsSection = document.getElementById('jobs');
+    jobsSection.parentNode.insertBefore(searchResultsDiv, jobsSection);
+    
+    // Scroll to results
+    searchResultsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 // Apply for Job

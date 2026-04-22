@@ -1,14 +1,18 @@
 // Check if employer is logged in
 document.addEventListener('DOMContentLoaded', function() {
-    updateNavbar();
-    
     const currentUser = localStorage.getItem('currentUser');
+    
     if (!currentUser) {
         alert('Please login first');
         window.location.href = 'login.html';
         return;
     }
 
+    const user = JSON.parse(currentUser);
+    
+    // Update navbar
+    updateNavbar();
+    
     loadEmployerData();
 });
 
@@ -128,16 +132,29 @@ function handlePostJob(event) {
     
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     
+    const jobTitle = document.getElementById('jobTitle').value.trim();
+    const jobLocation = document.getElementById('jobLocation').value.trim();
+    const jobSalary = document.getElementById('jobSalary').value.trim();
+    const jobType = document.getElementById('jobType').value;
+    const jobMode = document.getElementById('jobMode').value;
+    const jobDescription = document.getElementById('jobDescription').value.trim();
+
+    // Validation
+    if (!jobTitle || !jobLocation || !jobSalary || !jobType || !jobMode || !jobDescription) {
+        alert('Please fill in all fields');
+        return;
+    }
+
     const newJob = {
         id: Date.now(),
         employerId: currentUser.id,
         company: currentUser.fullname,
-        title: document.getElementById('jobTitle').value,
-        location: document.getElementById('jobLocation').value,
-        salary: document.getElementById('jobSalary').value,
-        type: document.getElementById('jobType').value,
-        mode: document.getElementById('jobMode').value,
-        description: document.getElementById('jobDescription').value,
+        title: jobTitle,
+        location: jobLocation,
+        salary: jobSalary,
+        type: jobType,
+        mode: jobMode,
+        description: jobDescription,
         postedDate: new Date().toLocaleDateString(),
         views: 0
     };
@@ -146,7 +163,8 @@ function handlePostJob(event) {
     postedJobs.push(newJob);
     localStorage.setItem('postedJobs', JSON.stringify(postedJobs));
 
-    alert('Job posted successfully!');
+    alert('✅ Job posted successfully!');
+    document.getElementById('postJobForm').reset();
     closePostJobModal();
     loadEmployerData();
 }
